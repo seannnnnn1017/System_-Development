@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 </head>
 
 <body>
+  
     <div class="box">
         <span class="borderLine"></span>
         <form action="loginCheck.php"
@@ -14,7 +16,7 @@
             <h2>Sign in</h2>
             <div class="inputBox">
                 <input type="text" name="id"
-                    id="account" required="required">
+                    id="id" required="required">
                 <span>Username</span>
                 <i></i>   
             </div> 
