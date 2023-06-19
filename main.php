@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+  // 在這裡使用 $id
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,6 +39,11 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <?php
+    echo "<h2>Wellcome: ".$id."</h2>"
+    ?>
+    
   </nav>
   
 </div>
