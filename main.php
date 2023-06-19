@@ -1,11 +1,3 @@
-<?php
-if (isset($_GET['id'])) {
-  $id = "<h2>Welcome: ".$_GET['id']."</h2>";
-  // ¦b?¨½¨Ï¥Î $id
-} else {
-  $id = '<button type="button"  class="btn btn-secondary btn-sm"><a href="http://140.134.53.57:21080/login.php">Sign in</a></button>';
-}
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -41,11 +33,6 @@ if (isset($_GET['id'])) {
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <?php
-    echo $id
-    ?>
-    
   </nav>
   
 </div>

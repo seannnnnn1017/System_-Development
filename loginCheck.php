@@ -16,23 +16,8 @@ if ($conn->connect_error) {
 $_id = $_POST["id"];
 $_pw = $_POST["pw"];
 
-// 對輸入的密碼進行 SHA1 加密
-$hashed_password = sha1($_pw);
-
-// 使用預備語句準備查詢
-$stmt = $conn->prepare("SELECT * FROM account WHERE UserName = ? AND Password = ?");
-$stmt->bind_param("ss", $_id, $hashed_password);
-$stmt->execute();
-
-// 獲取查詢結果
-$result = $stmt->get_result();
-
-//檢查是否有匹配的帳號與密碼
-if ($result->num_rows == 1) {
-    //登入成功，導向主頁面
-    session_start();
-    $_SESSION['user_id']=$_id;
-    header("Location: index.php?id=" . $_id, true, 301);
+if (strcmp($_id, "Sean") == 0 && strcmp($_pw, '23756778') == 0) {
+    header("Locationindex.php?id=" . $_id",true,301);
     exit();
 } else {
     // 登入失敗
