@@ -1,5 +1,6 @@
 <?php
-// «Ø¥ß»P MySQL ¸ê®Æ®wªº³s±µ
+session_start();
+// å»ºç«‹èˆ‡ MySQL è³‡æ–™åº«çš„é€£æŽ¥
 $servername = "localhost";
 $username = "op23756778";
 $password = "Sean23756778";
@@ -7,32 +8,40 @@ $dbname = "op23756778";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// ÀË¬d³s±µ¬O§_¦¨¥\
+// æª¢æŸ¥é€£æŽ¥æ˜¯å¦æˆåŠŸ
 if ($conn->connect_error) {
-    die("³s±µ¥¢±Ñ¡G" . $conn->connect_error);
+    die("é€£æŽ¥å¤±æ•—ï¼š" . $conn->connect_error);
 }
 
-// Àò¨ú POST ¸ê®Æ
+// ç²å– POST è³‡æ–™
 $_id = $_POST["id"];
 $_pw = $_POST["pw"];
+$_pw = sha1($_pw);
 
-if (strcmp($_id, "Sean") == 0 && strcmp($_pw, '23756778') == 0) {
-    header("Locationindex.php?id=" . $_id",true,301);
-    exit();
+// Retrieve the user information from the database
+$userQuery = "SELECT UserName, password FROM account WHERE UserName = '".$_id."'";
+$userData = $conn->query($userQuery);
+
+if ($userData->num_rows > 0) {
+    $row = $userData->fetch_assoc();
+    if (strcmp($_pw, $row["password"]) == 0) {
+        $_SESSION['user_id'] = $_id;
+        header("Location: index.php?id=" . $_id, true, 301);
+        exit();
+    }
 } else {
-    // µn¤J¥¢±Ñ
+    // ç™»å…¥å¤±æ•—
     echo "<h1>ERROR</h1>";
-        // ¬d¸ß©Ò¦³±b¸¹
-    $allUsers = $conn->query("SELECT UserName FROM account");
+    // æŸ¥è©¢æ‰€æœ‰å¸³è™Ÿ
+    $allUsers = $conn->query("SELECT UserName, password FROM account");
     if ($allUsers->num_rows > 0) {
         while ($row = $allUsers->fetch_assoc()) {
-            echo $row["UserName"] . $row["password"] ."<br>";
-            echo "your entry:" . $_id ."Password". $hashed_password;
+            echo $row["UserName"] . $row["password"] . "<br>";
+            echo "Your entry: " . $_id . " Password: " . $_pw;
         }
     }
 }
 
-// Ãö³¬¸ê®Æ®w³s±µ
-$stmt->close();
+// é—œé–‰è³‡æ–™åº«é€£æŽ¥
 $conn->close();
 ?>
